@@ -1,0 +1,38 @@
+From 7595f38f62afa7ac3451018d865fb251e3ce91c3 Mon Sep 17 00:00:00 2001
+From: Paul Smith <psmith@gnu.org>
+Date: Sun, 1 Oct 2006 05:38:38 +0000
+Subject: [PATCH] Fixed a number of documentation bugs, plus some build/install
+ issues:   16304, 16468, 16577, 17701, 17880, 16051, 16652, 16698 Plus some
+ from the mailing list.
+
+Imported a patch from Eli to allow Cygwin builds to support DOS-style
+pathnames.
+
+Comment from Ray Donnelly <mingw.android@gmail.com>:
+
+I took only the build-failure fix from Eli 
+
+---
+ job.c                             |  6 +++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/job.c b/job.c
+index 50c6d8f..79bdb0d 100644
+--- a/job.c
++++ b/job.c
+@@ -2307,6 +2307,12 @@ construct_command_argv_internal (char *line, char **restp, char *shell,
+                              "login", "logout", "read", "readonly", "set",
+                              "shift", "switch", "test", "times", "trap",
+                              "umask", "wait", "while", 0 };
++# ifdef HAVE_DOS_PATHS
++  /* This is required if the MSYS/Cygwin ports (which do not define
++     WINDOWS32) are compiled with HAVE_DOS_PATHS defined, which uses
++     sh_chars_sh[] directly (see below).  */
++  static char *sh_chars_sh = sh_chars;
++# endif	 /* HAVE_DOS_PATHS */
+ #endif
+   register int i;
+   register char *p;
+-- 
+2.6.3
+
