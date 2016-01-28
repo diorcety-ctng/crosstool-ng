@@ -34,5 +34,5 @@ You can also point your browser at: http://crosstool-ng.org
 
 Aloha!
 
-[travis-status]: https://travis-ci.org/crosstool-ng/crosstool-ng.svg
-[travis]: https://travis-ci.org/crosstool-ng/crosstool-ng
+[travis-status]: https://travis-ci.org/diorcety-ctng/crosstool-ng.svg
+[travis]: https://travis-ci.org/diorcety-ctng/crosstool-ng
