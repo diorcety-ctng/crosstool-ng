@@ -58,14 +58,26 @@ toolchain on MacOS as host.
    make sure that macport's bin dir is in the front (!) of your PATH.
    Furtheron assuming it is /opt/local/bin.
 
-3) Install (at least) the following macports
-   lzmautils
-   libtool
-   binutils
-   gsed
-   gawk
-   gcc43 (only necessary for Leopard OSX 10.5)
-   gcc_select (only necessary for OSX 10.5, or Xcode > 4)
+3) Install (at least) the following:
+   Either:
+   3.1) From macports
+        lzmautils
+        libtool
+        binutils
+        gsed
+        gawk
+        gcc43 (only necessary for Leopard OSX 10.5)
+        gcc_select (only necessary for OSX 10.5, or Xcode > 4)
+   Or:
+   3.2) From homebrew:
+        autoconf
+        gnu-sed
+        binutils
+        wget
+        gawk
+        libtool
+        automake
+        help2man
 
 4) Prerequisites
    On Leopard, make sure that the macport's gcc is called with the default
@@ -108,7 +120,6 @@ HINTS:
   as an explanation.
 - ct-ng menuconfig will not work on Snow Leopard 10.6.3 since libncurses
   is broken with this release. MacOS <= 10.6.2 and >= 10.6.4 are ok.
-
 
 Using Mercurial to hack crosstool-NG |
 -------------------------------------+

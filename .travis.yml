@@ -5,6 +5,15 @@ sudo: false
 # settings like "CC=gcc"
 language: bash
 
+#  - linux
+os:
+  - osx
+
+# OS X isn't ready, either on crosstool-NG's side nor Travis CI's side.
+matrix:
+  allow_failures:
+    - os: osx
+
 # Only build the master branch
 branches:
     only:
@@ -27,10 +36,16 @@ addons:
             - texinfo
             - help2man
 
+# See: https://docs.travis-ci.com/user/osx-ci-environment/
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update                                ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gnu-sed binutils gawk help2man; fi
+
 # Building crosstool-NG core
 install:
     - ./bootstrap
-    - ./configure --enable-local
+    - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./configure --enable-local --with-sed=$(which gsed) --with-objcopy=$(which gobjcopy) --with-objdump=$(which gobjdump) --with-ranlib=$(which granlib) --with-readelf=$(which greadelf) --with-awk=$(which gawk) --with-libtool=$(which glibtool) --with-libtoolize=$(which glibtoolize); fi
+    - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then ./configure --enable-local; fi
     - make
 
 # Here is the list of all the standard samples tracked
